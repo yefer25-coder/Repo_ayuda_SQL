@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitas Veterinaria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Registro de Visitas y Tratamientos</h1>
+
+  <form id="visitaForm">
+    <input type="hidden" id="visitaId">
+
+    <!-- Animal -->
+    <select id="id_animal" required></select>
+
+    <!-- Medicamento -->
+    <select id="id_medicamento" required></select>
+
+    <input type="date" id="fecha" required>
+    <textarea id="observaciones" placeholder="Observaciones"></textarea>
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Animal</th>
+        <th>Medicamento</th>
+        <th>Fecha</th>
+        <th>Observaciones</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="visitasTable"></tbody>
+  </table>
+
+  <script src="visitas.js"></script>
+</body>
+</html>

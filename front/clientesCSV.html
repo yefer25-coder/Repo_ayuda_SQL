@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargar CSV Clientes</title>
+</head>
+<body>
+  <h1>Subir archivo CSV para Clientes</h1>
+
+  <form id="uploadForm">
+    <input type="file" id="archivo" name="archivo" accept=".csv" required>
+    <button type="submit">Subir</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("archivo", document.getElementById("archivo").files[0]);
+
+      const res = await fetch("http://localhost:3000/clientes/upload-csv", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      document.getElementById("resultado").innerText = JSON.stringify(data);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animales Veterinaria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Gestión de Animales</h1>
+
+  <!-- Formulario -->
+  <form id="animalForm">
+    <input type="hidden" id="animalId">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="especie" placeholder="Especie" required>
+    <input type="text" id="raza" placeholder="Raza">
+    <input type="number" id="edad" placeholder="Edad">
+
+    <!-- Selección de cliente -->
+    <select id="id_cliente" required></select>
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <!-- Tabla -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Especie</th>
+        <th>Raza</th>
+        <th>Edad</th>
+        <th>Cliente</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="animalesTable"></tbody>
+  </table>
+
+  <script src="animales.js"></script>
+</body>
+</html>
