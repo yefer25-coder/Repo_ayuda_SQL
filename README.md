@@ -254,6 +254,49 @@ Si quieres, puedo ahora pasarte el modelo relacional en draw.io listo para que l
 ¿Quieres que te lo prepare?
 
 
+SELECT 
+    c.customer_id,
+    c.full_name,
+    SUM(i.paid_amount) AS total_paid
+FROM customers c
+JOIN invoices i ON c.customer_id = i.customer_id
+GROUP BY c.customer_id, c.full_name
+ORDER BY total_paid DESC;
+
+
+SELECT 
+    i.invoice_id,
+    i.invoice_number,
+    i.billing_period,
+    i.billed_amount,
+    i.paid_amount,
+    (i.billed_amount - i.paid_amount) AS pending_amount,
+    c.full_name AS customer_name,
+    t.transaction_code,
+    t.transaction_status
+FROM invoices i
+JOIN customers c ON i.customer_id = c.customer_id
+LEFT JOIN transactions t ON i.invoice_id = t.invoice_id
+WHERE i.paid_amount < i.billed_amount
+ORDER BY pending_amount DESC;
+
+
+
+SELECT 
+    i.invoice_id,
+    i.invoice_number,
+    i.billing_period,
+    i.billed_amount,
+    i.paid_amount,
+    (i.billed_amount - i.paid_amount) AS pending_amount,
+    c.full_name AS customer_name,
+    t.transaction_code,
+    t.transaction_status
+FROM invoices i
+JOIN customers c ON i.customer_id = c.customer_id
+LEFT JOIN transactions t ON i.invoice_id = t.invoice_id
+WHERE i.paid_amount < i.billed_amount
+ORDER BY pending_amount DESC;
 
 
 
