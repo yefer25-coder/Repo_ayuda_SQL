@@ -303,4 +303,66 @@ ORDER BY pending_amount DESC;
 
 
 
+-- Crear la base de datos (cambia tu nombre y apellido)
+CREATE DATABASE IF NOT EXISTS pd_tunombre_tuapellido_clan;
+USE pd_tunombre_tuapellido_clan;
+
+-- =========================
+-- 1. Tabla de Clientes
+-- =========================
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(100) NOT NULL,
+    identification_number VARCHAR(20) NOT NULL UNIQUE,
+    address VARCHAR(255) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- =========================
+-- 2. Tabla de Plataformas
+-- =========================
+CREATE TABLE platforms (
+    platform_id INT PRIMARY KEY AUTO_INCREMENT,
+    platform_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- =========================
+-- 3. Tabla de Facturas
+-- =========================
+CREATE TABLE invoices (
+    invoice_id INT PRIMARY KEY AUTO_INCREMENT,
+    invoice_number VARCHAR(20) NOT NULL UNIQUE,
+    billing_period VARCHAR(7) NOT NULL, -- formato YYYY-MM
+    billed_amount DECIMAL(12,2) NOT NULL CHECK (billed_amount >= 0),
+    paid_amount DECIMAL(12,2) NOT NULL DEFAULT 0 CHECK (paid_amount >= 0),
+    customer_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- =========================
+-- 4. Tabla de Transacciones
+-- =========================
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    transaction_code VARCHAR(20) NOT NULL UNIQUE,
+    transaction_datetime DATETIME NOT NULL,
+    transaction_amount DECIMAL(12,2) NOT NULL CHECK (transaction_amount >= 0),
+    transaction_status ENUM('Pendiente', 'Completada', 'Fallida') NOT NULL,
+    transaction_type VARCHAR(50) NOT NULL,
+    platform_id INT NOT NULL,
+    invoice_id INT NOT NULL,
+    FOREIGN KEY (platform_id) REFERENCES platforms(platform_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+
+
+
 
