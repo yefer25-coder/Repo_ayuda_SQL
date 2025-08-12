@@ -213,3 +213,51 @@ TXN099	2024-07-27 10:00:00	105611	Fallida	Pago de Factura	Christopher Gomez	9178
 TXN100	2024-07-11 07:00:00	141787	Fallida	Pago de Factura	Brian Morton	843106189	431 Rodriguez Estate Suite 894 New Christopherview, TN 74616	+1-352-961-6835x0739	garnold@bender-caldwell.com	Daviplata	FAC8875	2024-06	142787	141787
 
 
+Modelo Normalizado
+Tabla: customers
+customer_id	full_name	identification_number	address	phone	email
+1	Angel Daniel	149186547	USNS Davis FPO AP 78518	(873)222-2692x09480	rmiller@boyer.com
+2	Matthew Wilson	475925688	42023 Barrett Path Suite 281 Jeremyborough, OH 72889	(264)225-7425	matthew15@ramirez.com
+3	Jennifer Phelps	112231541	392 Smith Corners Apt. 737 East Angeltown, MO 64086	248.695.2117	echristian@hotmail.com
+4	Jonathan Cook	708283326	657 Landry Way Suite 966 Robinsonfurt, CA 22461	0756633727	zjones@yahoo.com
+5	Lindsay Garcia	959234562	906 Justin Locks Apt. 838 Port Timothyview, AR 68865	001-158-358-0277	juliamatthews@carpenter.com
+
+Tabla: platforms
+platform_id	platform_name
+1	Nequi
+2	Daviplata
+
+Tabla: invoices
+invoice_id	invoice_number	billing_period	billed_amount	paid_amount	customer_id (FK)
+1	FAC7068	2024-06	39940	0	1
+2	FAC6577	2024-06	76145	75145	2
+3	FAC5707	2024-06	179217	179217	3
+4	FAC7188	2024-07	52267	51767	4
+5	FAC7289	2024-06	157001	156501	5
+
+Tabla: transactions
+transaction_id	transaction_code	transaction_datetime	transaction_amount	transaction_status	transaction_type	platform_id (FK)	invoice_id (FK)
+1	TXN001	2024-06-01 10:00:00	38940	Pendiente	Pago de Factura	1	1
+2	TXN002	2024-07-09 12:00:00	75145	Pendiente	Pago de Factura	2	2
+3	TXN003	2024-06-13 10:00:00	179217	Fallida	Pago de Factura	2	3
+4	TXN004	2024-07-26 13:00:00	51767	Fallida	Pago de Factura	2	4
+5	TXN005	2024-07-28 06:00:00	156501	Completada	Pago de Factura	2	5
+
+Relaciones
+Un cliente puede tener muchas facturas (1:N).
+
+Una factura puede tener muchas transacciones (1:N).
+
+Una plataforma puede estar asociada a muchas transacciones (1:N).
+
+Si quieres, puedo ahora pasarte el modelo relacional en draw.io listo para que lo incluyas en tu entrega y el script SQL DDL para crear la base ya normalizada.
+¿Quieres que te lo prepare?
+
+
+
+
+
+
+
+
+
